@@ -19,9 +19,10 @@ def boards():
     print(response.json())
     res = response.json()
 
-    # print(res[0]['id'])
+    return jsonify(response.json())
+
     # return jsonify(id=res[0]['id'])
-    return 'done'
+
 
 @app.route('/index')
 def index():

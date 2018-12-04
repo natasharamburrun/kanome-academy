@@ -113,3 +113,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+node_modules
+public
+*.log
+.nyc_output

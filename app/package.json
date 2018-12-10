@@ -14,7 +14,8 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-dazzle": "^1.4.0",
+    "react-dom": "^15.6.2",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Navbar from './components/common/Navbar';
-import Dashboard from './components/board/Dashboard';
+import DashboardComponent from './components/board/DashboardComponent';
 
 // import 'bulma';
 import './static/style.scss';
@@ -18,7 +18,7 @@ class App extends React.Component {
         <div>
           <Navbar />
           <Switch>
-            <Route to="/" component={Dashboard} />       
+            <Route to="/" component={DashboardComponent} />       
           </Switch>
         </div>
       </BrowserRouter> 

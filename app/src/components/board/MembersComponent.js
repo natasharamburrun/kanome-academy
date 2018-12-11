@@ -8,13 +8,11 @@ const DEBUG = true;
 class MembersComponent extends React.Component {
   constructor() {
     super();
-    this.state = {
-      card: []
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/card')
+    axios.get('http://localhost:4000/card/${this.props.match.params.id}')
       .then(res => {
         this.setState({ card: res.data });
      });

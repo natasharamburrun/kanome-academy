@@ -3,7 +3,7 @@ from flask_cors import CORS
 import requests
 import os
 
-from .config import get_client
+# from .config import get_client
 
 app = Flask(__name__)
 CORS(app)

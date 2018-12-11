@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
+    "lodash": "^4.17.11",
     "react": "^15.6.1",
     "react-dazzle": "^1.4.0",
     "react-dom": "^15.6.2",
@@ -30,7 +31,7 @@
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^6.0.7",
     "style-loader": "^0.18.2",
     "url-loader": "^1.1.2",
     "webpack": "^3.3.0",

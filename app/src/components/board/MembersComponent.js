@@ -9,17 +9,18 @@ class MembersComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      members: []
+      card: []
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/members')
-    // axios.get(DEBUG ? 'localhost:4000/board' : '/board/')
+    axios.get('http://localhost:4000/card')
       .then(res => {
-        this.setState({ members: res.data });
+        this.setState({ card: res.data });
      });
   }
+
+  
 
   render() {
 		console.log(this.state);
@@ -27,18 +28,7 @@ class MembersComponent extends React.Component {
    
     return (
       <main>
-        <div className="members container">
-          <div className="row">
-            {this.state.members.map(member => 
-              <div key={member.id}>
-
-            
-              <div className="col s12 m6">{member.name}</div>
-              <div className= "col s12 m5 offset-m1">{member.due}</div>
-           </div>
-            )}
-          {/* <Dashboard widgets={this.state.widgets} layout={this.state.layout} /> */}
-          </div>
+        <div className="">
         </div>
       </main>
     );

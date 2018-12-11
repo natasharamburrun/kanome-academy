@@ -2,10 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import Navbar from './components/common/Navbar';
 import DashboardComponent from './components/board/DashboardComponent';
+import MembersComponent from './components/board/MembersComponent';
 
 // import 'bulma';
 import './static/style.scss';
@@ -15,11 +15,9 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route to="/" component={DashboardComponent} />       
-          </Switch>
+        <div>     
+          <Route to="/" component={DashboardComponent} />     
+          <Route to="/" component={MembersComponent} />        
         </div>
       </BrowserRouter> 
     );

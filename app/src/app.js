@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import DashboardComponent from './components/board/DashboardComponent';
 import MembersComponent from './components/board/MembersComponent';
 
-// import 'bulma';
+import 'bulma';
 import './static/style.scss';
 
 class App extends React.Component {

@@ -14,9 +14,11 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
     "lodash": "^4.17.11",
+    "moment": "^2.22.2",
     "react": "^15.6.1",
     "react-dazzle": "^1.4.0",
     "react-dom": "^15.6.2",
+    "react-moment": "^0.8.4",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {

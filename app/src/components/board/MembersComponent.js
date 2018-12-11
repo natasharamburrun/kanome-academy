@@ -8,11 +8,14 @@ const DEBUG = true;
 class MembersComponent extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+        idCard: "5bbfbc64884cf66f2500581a"
+    };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/card/${this.props.match.params.id}')
+    console.log(this.state.idCard);
+    axios.get('http://localhost:4000/card/' + this.state.idCard)
       .then(res => {
         this.setState({ card: res.data });
      });

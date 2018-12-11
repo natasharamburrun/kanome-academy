@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import Moment from 'react-moment';
 
 
 const DEBUG = true;
@@ -25,21 +26,17 @@ class DashboardComponent extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    e.target.reset();
     const seachRegex = new RegExp(this.state.search, 'i');
     const filterName = _.filter(this.state.data, (dashboard) => seachRegex.test(dashboard.title));
     this.setState({ filterName })
     // return dashboard.filter(dashboard => seachRegex.test(dashboard.name));
   }
 
-
-  
-
   handleChange = ({ target: { name, value }}) => {
     this.setState({ [name]: value });
 
   }
-
-
 
   render() {
 		console.log(this.state);
@@ -51,24 +48,25 @@ class DashboardComponent extends React.Component {
           <h1 className='title'>Kano Academy Dashboard</h1>
         </div>
 
-        <form className="searchbar" onSubmit={this.handleSubmit}>
+        <form className="searchbar container" onSubmit={this.handleSubmit}>
           <div className="field">
-            <label className="label">Search</label>
             <div className="control">
-              <input className="input" name="search" type="text" placeholder="Search by name" onChange={this.handleChange} />
+              <input className="input" name="search" type="text" placeholder="Search by Task Name" onChange={this.handleChange} />
             </div>
           </div>
           <button className="button">Search</button>
         </form>
 
         <div className="dashboard container">
-          <div className="row">
+          <div className="column is-multiline">
             {this.state.dashboard.map(dashboard => 
               <div key={dashboard.id}>           
-              <div className="col s12 m6">{dashboard.name}</div>
-              <div className="col s12 m5 offset-m1">{dashboard.due}</div>
-              <div className="col s12 m6">{dashboard.dueComplete}</div>
-              <div className="col s12 m6">{dashboard.desc}</div>
+              <div className="taskName">{dashboard.name}</div>
+              <div className="dueDate">
+                <Moment format="YYYY/MM/DD">{this.props.dateToFormat}</Moment>
+              </div>
+              <div className="dueComplete">{dashboard.dueComplete}</div>
+              <div className="description">{dashboard.desc}</div>
            </div>
             )}
           </div>

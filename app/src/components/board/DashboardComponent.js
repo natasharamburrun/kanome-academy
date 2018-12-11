@@ -18,7 +18,6 @@ class DashboardComponent extends React.Component {
 
   componentDidMount() {
     axios.get('http://localhost:4000/board')
-    // axios.get(DEBUG ? 'localhost:4000/board' : '/board/')
       .then(res => {
         this.setState({ dashboard: res.data });
      });
@@ -30,7 +29,6 @@ class DashboardComponent extends React.Component {
     const seachRegex = new RegExp(this.state.search, 'i');
     const filterName = _.filter(this.state.data, (dashboard) => seachRegex.test(dashboard.title));
     this.setState({ filterName })
-    // return dashboard.filter(dashboard => seachRegex.test(dashboard.name));
   }
 
   handleChange = ({ target: { name, value }}) => {
@@ -63,7 +61,7 @@ class DashboardComponent extends React.Component {
               <div key={dashboard.id}>           
               <div className="taskName">{dashboard.name}</div>
               <div className="dueDate">
-                <Moment format="YYYY/MM/DD">{this.props.dateToFormat}</Moment>
+                <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
               </div>
               <div className="dueComplete">{dashboard.dueComplete}</div>
               <div className="description">{dashboard.desc}</div>

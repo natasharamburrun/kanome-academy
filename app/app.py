@@ -23,7 +23,7 @@ def boards():
     return jsonify(response.json())
 
 
-@app.route('/cards/<string:idCard>', methods=['GET'])
+@app.route('/cards/<string:idCard>' component={MembersComponent}, methods=['GET'])
 def card(idCard):
     API_KEY = os.getenv("API_KEY")
     TOKEN = os.getenv("TOKEN")

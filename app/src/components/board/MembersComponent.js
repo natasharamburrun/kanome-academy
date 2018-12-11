@@ -5,7 +5,7 @@ import axios from 'axios';
 const DEBUG = true;
 
 
-class MembersComponent extends React.Component {
+class MembersComponent extends React.Component { 
   constructor() {
     super();
     this.state = {
@@ -14,6 +14,7 @@ class MembersComponent extends React.Component {
   }
 
   componentDidMount() {
+
     console.log(this.state.idCard);
     axios.get('http://localhost:4000/card/' + this.state.idCard)
       .then(res => {

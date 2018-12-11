@@ -12,7 +12,8 @@ class DashboardComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      dashboard: []
+      dashboard: [],
+      filterName: []
     };
   }
 
@@ -27,13 +28,12 @@ class DashboardComponent extends React.Component {
     e.preventDefault();
     e.target.reset();
     const seachRegex = new RegExp(this.state.search, 'i');
-    const filterName = _.filter(this.state.data, (dashboard) => seachRegex.test(dashboard.title));
+    const filterName = _.filter(this.state.dashboard, (dashboard) => seachRegex.test(dashboard.name));
     this.setState({ filterName })
   }
 
   handleChange = ({ target: { name, value }}) => {
     this.setState({ [name]: value });
-
   }
 
   render() {
@@ -56,15 +56,16 @@ class DashboardComponent extends React.Component {
         </form>
 
         <div className="dashboard container">
-          <div className="column is-multiline">
-            {this.state.dashboard.map(dashboard => 
-              <div key={dashboard.id}>           
-              <div className="taskName">{dashboard.name}</div>
-              <div className="dueDate">
-                <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
+          <div className="columns is-multiline">
+            {(this.state.filterName && this.state.dashboard).map(dashboard => 
+              <div key={dashboard.id}>
+              <div className="card">      
+                <div className="taskName">{dashboard.name}</div>
+                <div className="dueDate">
+                  <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
+                </div>
+                <div className="dueComplete">{dashboard.dueComplete}</div>
               </div>
-              <div className="dueComplete">{dashboard.dueComplete}</div>
-              <div className="description">{dashboard.desc}</div>
            </div>
             )}
           </div>

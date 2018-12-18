@@ -46,7 +46,6 @@ class DashboardComponent extends React.Component {
         <div className="title container">
           <h1 className='title'>Kano Academy Dashboard</h1>
         </div>
-
         <form className="searchbar container" onSubmit={this.handleSubmit}>
           <div className="field">
             <div className="control">
@@ -55,7 +54,6 @@ class DashboardComponent extends React.Component {
           </div>
           <button className="button">Search</button>
         </form>
-
         <div className="dashboard container">
           <div className="columns is-multiline">
             {(this.state.filterName && this.state.dashboard).map(dashboard => 
@@ -69,7 +67,6 @@ class DashboardComponent extends React.Component {
                 <div className="members">
                   <MembersComponent cardId={dashboard.id} />
                 </div>
-                <div className="cardID">{dashboard.id}</div>
               </div>
            </div>
             )}

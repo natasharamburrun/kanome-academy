@@ -17,7 +17,6 @@ class App extends React.Component {
       <BrowserRouter>
         <div>     
           <Route to="/" component={DashboardComponent} />     
-          <Route to="/cards/:id" component={MembersComponent} />        
         </div>
       </BrowserRouter> 
     );

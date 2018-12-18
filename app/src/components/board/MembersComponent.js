@@ -1,36 +1,41 @@
-
 import React from 'react';
 import axios from 'axios';
+
+// import DashboardComponent from './DashboardComponent';
 
 const DEBUG = true;
 
 
 class MembersComponent extends React.Component { 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    // console.log(props)
+    // this.props = props;
     this.state = {
-        idCard: "5bbfbc64884cf66f2500581a"
+        card: {}
     };
   }
 
   componentDidMount() {
-
-    console.log(this.state.idCard);
-    axios.get('http://localhost:4000/card/' + this.state.idCard)
+    // console.log(this.props.cardId)
+    axios.get(`http://localhost:4000/cards/${this.props.cardId}`)
+    
       .then(res => {
-        this.setState({ card: res.data });
+        if (res.data.length > 0) {
+          this.setState({ card: res.data[0] });
+        }
      });
   }
-
-  
 
   render() {
 		console.log(this.state);
 		
    
     return (
+      
       <main>
-        <div className="">
+        <div>
+        <div className="taskName">{this.state.card.fullName}</div>
         </div>
       </main>
     );

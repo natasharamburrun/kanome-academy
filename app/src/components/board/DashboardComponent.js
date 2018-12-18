@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import Moment from 'react-moment';
+import MembersComponent from './MembersComponent';
 
 
 const DEBUG = true;
@@ -65,6 +66,10 @@ class DashboardComponent extends React.Component {
                   <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
                 </div>
                 <div className="dueComplete">{dashboard.dueComplete}</div>
+                <div className="members">
+                  <MembersComponent cardId={dashboard.id} />
+                </div>
+                <div className="cardID">{dashboard.id}</div>
               </div>
            </div>
             )}

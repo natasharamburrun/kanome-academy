@@ -10,43 +10,41 @@ const DEBUG = true;
 
 
 class DashboardComponent extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      dashboard: [],
-      filterName: []
+      dashboard: []
     };
   }
 
   componentDidMount() {
     axios.get('http://localhost:4000/board')
       .then(res => {
-        this.setState({ dashboard: res.data });
+        this.setState({ 
+          dashboard: res.data,
+        });
      });
+  }
+
+  handleChange = ({ target: { name, value }}) => {
+    this.setState({ [name]: value.toLowerCase() });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    e.target.reset();
-    const seachRegex = new RegExp(this.state.search, 'i');
-    const filterName = _.filter(this.state.dashboard, (dashboard) => seachRegex.test(dashboard.name));
-    this.setState({ filterName })
-  }
-
-  handleChange = ({ target: { name, value }}) => {
-    this.setState({ [name]: value });
+    const searchRegEx = new RegExp(this.state.search, 'i');
+    const filteredData = _.filter(this.state.dashboard, (dashboard) => searchRegEx.test(dashboard.name));
+    this.setState({ filteredData });
   }
 
   render() {
-		console.log(this.state);
-		
-   
+		console.log(this.state); 
     return (
       <main>
         <div className="title container">
           <h1 className='title'>Kano Academy Dashboard</h1>
         </div>
-        <form className="searchbar container" onSubmit={this.handleSubmit}>
+        <form className="searchbar container"  onSubmit={this.handleSubmit}>
           <div className="field">
             <div className="control">
               <input className="input" name="search" type="text" placeholder="Search by Task Name" onChange={this.handleChange} />
@@ -56,7 +54,7 @@ class DashboardComponent extends React.Component {
         </form>
         <div className="dashboard container">
           <div className="columns is-multiline">
-            {(this.state.filterName && this.state.dashboard).map(dashboard => 
+          {(this.state.filteredData? this.state.filteredData : this.state.dashboard).map(dashboard =>
               <div key={dashboard.id}>
               <div className="card">      
                 <div className="taskName">{dashboard.name}</div>

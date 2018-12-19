@@ -45,12 +45,14 @@ class DashboardComponent extends React.Component {
   renderCardView() {
     return this.filterDashboard().map(dashboard => (
       <div key={dashboard.id}>
-        <div className="card">
+        <div className="card column">
           <div className="taskName">{dashboard.name}</div>
           <div className="dueDate">
             <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
           </div>
-          <div className="dueComplete">{dashboard.dueComplete}</div>
+          <div className="dueComplete">
+            {dashboard.dueComplete ? "Completed" : "In Progress"}
+          </div>
           <div className="members">
             <MembersComponent cardId={dashboard.id} />
           </div>
@@ -62,39 +64,35 @@ class DashboardComponent extends React.Component {
   renderTableView() {
     return (
       <div className="filteredItems">
-        <div className="columns">
-          <div className="column is-full">
-            <table className="table is-bordered">
-              <thead>
-                <tr>
-                  <th>Task Name</th>
-                  <th>Due Date</th>
-                  <th>Completed</th>
-                  <th>Assigned Name</th>
+        <div className="column is-full">
+          <table className="table is-bordered">
+            <thead>
+              <tr>
+                <th>Task Name</th>
+                <th>Due Date</th>
+                <th>Completed</th>
+                <th>Assigned Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.filterDashboard().map(dashboard => (
+                <tr key={dashboard.id}>
+                  <td>{dashboard.name}</td>
+                  <td>
+                    <div className="dueDate">
+                      <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
+                    </div>
+                  </td>
+                  <td>{dashboard.dueComplete ? "Completed" : "In Progress"}</td>
+                  <td>
+                    <div className="members">
+                      <MembersComponent cardId={dashboard.id} />
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {this.filterDashboard().map(dashboard => (
-                  <tr key={dashboard.id}>
-                    <td>{dashboard.name}</td>
-                    <td>
-                      <div className="dueDate">
-                        <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
-                      </div>
-                    </td>
-                    <td>
-                      {dashboard.dueComplete ? "Completed" : "In Progress"}
-                    </td>
-                    <td>
-                      <div className="members">
-                        <MembersComponent cardId={dashboard.id} />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     );
@@ -103,12 +101,14 @@ class DashboardComponent extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <main>
-        <div className="title">
-          <h1 className="title">Kano Academy Dashboard</h1>
+      <main className="container">
+        <div className="columns">
+          <div className="title column">
+            <h1 className="title">Kano Academy Dashboard</h1>
+          </div>
         </div>
-        <div className="container">
-          <form className="searchbar">
+        <div className="columns">
+          <form className="searchbar column is-half">
             <div className="field">
               <div className="control">
                 <input
@@ -121,7 +121,7 @@ class DashboardComponent extends React.Component {
               </div>
             </div>
           </form>
-          <div className="dropdown is-right is-active">
+          <div className="dropdown is-active column is-half">
             <div className="dropdown-trigger">
               <select onChange={this.handleViewChange}>
                 <option value="card">Card View</option>
@@ -130,12 +130,10 @@ class DashboardComponent extends React.Component {
             </div>
           </div>
         </div>
-        <div className="dashboard container">
-          <div className="columns is-multiline">
-            {this.state.view === "card"
-              ? this.renderCardView()
-              : this.renderTableView()}
-          </div>
+        <div className="columns is-third-desktop is-multiline is-centered">
+          {this.state.view === "card"
+            ? this.renderCardView()
+            : this.renderTableView()}
         </div>
       </main>
     );

@@ -1,73 +1,140 @@
-
-import React from 'react';
-import axios from 'axios';
-import _ from 'lodash';
-import Moment from 'react-moment';
-import MembersComponent from './MembersComponent';
-
+import React from "react";
+import axios from "axios";
+import _ from "lodash";
+import Moment from "react-moment";
+import MembersComponent from "./MembersComponent";
 
 const DEBUG = true;
-
 
 class DashboardComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      view: "card",
       dashboard: []
     };
   }
 
+  filterDashboard() {
+    if (!!this.state.search) {
+      const searchRegEx = new RegExp(this.state.search, "i");
+      return _.filter(this.state.dashboard, dashboard =>
+        searchRegEx.test(dashboard.name)
+      );
+    }
+    return this.state.dashboard;
+  }
+
   componentDidMount() {
-    axios.get('http://localhost:4000/board')
-      .then(res => {
-        this.setState({ 
-          dashboard: res.data,
-        });
-     });
+    axios.get("http://localhost:4000/board").then(res => {
+      this.setState({
+        dashboard: res.data
+      });
+    });
   }
 
-  handleChange = ({ target: { name, value }}) => {
+  handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value.toLowerCase() });
+  };
+
+  handleViewChange = ({ target: { name, value } }) => {
+    console.log(value);
+    this.setState({ view: value });
+  };
+
+  renderCardView() {
+    return this.filterDashboard().map(dashboard => (
+      <div key={dashboard.id}>
+        <div className="card">
+          <div className="taskName">{dashboard.name}</div>
+          <div className="dueDate">
+            <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
+          </div>
+          <div className="dueComplete">{dashboard.dueComplete}</div>
+          <div className="members">
+            <MembersComponent cardId={dashboard.id} />
+          </div>
+        </div>
+      </div>
+    ));
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const searchRegEx = new RegExp(this.state.search, 'i');
-    const filteredData = _.filter(this.state.dashboard, (dashboard) => searchRegEx.test(dashboard.name));
-    this.setState({ filteredData });
+  renderTableView() {
+    return (
+      <div className="filteredItems">
+        <div className="columns">
+          <div className="column is-full">
+            <table className="table is-bordered">
+              <thead>
+                <tr>
+                  <th>Task Name</th>
+                  <th>Due Date</th>
+                  <th>Completed</th>
+                  <th>Assigned Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.filterDashboard().map(dashboard => (
+                  <tr key={dashboard.id}>
+                    <td>{dashboard.name}</td>
+                    <td>
+                      <div className="dueDate">
+                        <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
+                      </div>
+                    </td>
+                    <td>
+                      {dashboard.dueComplete ? "Completed" : "In Progress"}
+                    </td>
+                    <td>
+                      <div className="members">
+                        <MembersComponent cardId={dashboard.id} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
-		console.log(this.state); 
+    console.log(this.state);
     return (
       <main>
-        <div className="title container">
-          <h1 className='title'>Kano Academy Dashboard</h1>
+        <div className="title">
+          <h1 className="title">Kano Academy Dashboard</h1>
         </div>
-        <form className="searchbar container"  onSubmit={this.handleSubmit}>
-          <div className="field">
-            <div className="control">
-              <input className="input" name="search" type="text" placeholder="Search by Task Name" onChange={this.handleChange} />
+        <div className="container">
+          <form className="searchbar">
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  name="search"
+                  type="text"
+                  placeholder="Search by Task Name"
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div>
+          </form>
+          <div className="dropdown is-right is-active">
+            <div className="dropdown-trigger">
+              <select onChange={this.handleViewChange}>
+                <option value="card">Card View</option>
+                <option value="table">Table View</option>
+              </select>
             </div>
           </div>
-          <button className="button">Search</button>
-        </form>
+        </div>
         <div className="dashboard container">
           <div className="columns is-multiline">
-          {(this.state.filteredData? this.state.filteredData : this.state.dashboard).map(dashboard =>
-              <div key={dashboard.id}>
-              <div className="card">      
-                <div className="taskName">{dashboard.name}</div>
-                <div className="dueDate">
-                  <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
-                </div>
-                <div className="dueComplete">{dashboard.dueComplete}</div>
-                <div className="members">
-                  <MembersComponent cardId={dashboard.id} />
-                </div>
-              </div>
-           </div>
-            )}
+            {this.state.view === "card"
+              ? this.renderCardView()
+              : this.renderTableView()}
           </div>
         </div>
       </main>

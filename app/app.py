@@ -18,7 +18,7 @@ def boards():
     url = 'https://api.trello.com/1/boards/5bb34b7b941a295e2ecd1c12/cards?key={api_key}&token={token}'.format(api_key=API_KEY, token=TOKEN)
 
     response = requests.request("GET", url)
-    print(response.json())
+    print(response)
 
     return jsonify(response.json())
 

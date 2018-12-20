@@ -9,7 +9,7 @@ Import JSON data from the Trello board API for the Kano academy board
 
 1. clone the repo
 2. `cd app && npm install`
-3. `pip install -r requirements.txt
+3. `pip install -r requirements.txt`
 
 ### To run the project:
 

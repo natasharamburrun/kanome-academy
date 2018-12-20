@@ -107,8 +107,8 @@ class DashboardComponent extends React.Component {
             <h1 className="title">Kano Academy Dashboard</h1>
           </div>
         </div>
-        <div className="columns">
-          <form className="searchbar column is-half">
+        <div className="header">
+          <form className="searchbar">
             <div className="field">
               <div className="control">
                 <input
@@ -121,7 +121,7 @@ class DashboardComponent extends React.Component {
               </div>
             </div>
           </form>
-          <div className="dropdown is-active column is-half">
+          <div className="dropdown">
             <div className="dropdown-trigger">
               <select onChange={this.handleViewChange}>
                 <option value="card">Card View</option>
@@ -130,7 +130,7 @@ class DashboardComponent extends React.Component {
             </div>
           </div>
         </div>
-        <div className="columns is-third-desktop is-multiline is-centered">
+        <div className="columns data is-multiline is-centered">
           {this.state.view === "card"
             ? this.renderCardView()
             : this.renderTableView()}

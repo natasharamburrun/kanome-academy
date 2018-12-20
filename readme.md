@@ -7,13 +7,15 @@ Import JSON data from the Trello board API for the Kano academy board
 
 Dependencies/ Instructions 
 
-$ npm install
+1. clone the repo
+2. `cd app`
+3. `npm install`
+4. `pip install -r requirements.txt
+requirement.txt`
 
-$ pip install -r requirements.txt
-requirement.txt
+Technologies used:
 
-Technologies used
-ReactJS
-Flask.py
-Axios
+1. ReactJS
+2. Flask.py
+3. Axios
 

@@ -9,13 +9,14 @@ app = Flask(__name__)
 CORS(app)
 
 
-
-@app.route('/board', methods=['GET'])
+@app.route("/board", methods=["GET"])
 def boards():
     # client = get_client()
     API_KEY = os.getenv("API_KEY")
     TOKEN = os.getenv("TOKEN")
-    url = 'https://api.trello.com/1/boards/5bb34b7b941a295e2ecd1c12/cards?key={api_key}&token={token}'.format(api_key=API_KEY, token=TOKEN)
+    url = "https://api.trello.com/1/boards/5bb34b7b941a295e2ecd1c12/cards?key={api_key}&token={token}".format(
+        api_key=API_KEY, token=TOKEN
+    )
 
     response = requests.request("GET", url)
     print(response)
@@ -23,13 +24,14 @@ def boards():
     return jsonify(response.json())
 
 
-@app.route('/cards/<string:idCard>', methods=['GET'])
+@app.route("/cards/<string:idCard>", methods=["GET"])
 def card(idCard):
     API_KEY = os.getenv("API_KEY")
     TOKEN = os.getenv("TOKEN")
-    url = 'https://api.trello.com/1/cards/{idCard}/members?key={api_key}&token={token}'.format(idCard=idCard,api_key=API_KEY, token=TOKEN)
-    
-   
+    url = "https://api.trello.com/1/cards/{idCard}/members?key={api_key}&token={token}".format(
+        idCard=idCard, api_key=API_KEY, token=TOKEN
+    )
+
     response = requests.request("GET", url)
     print(response.json())
 

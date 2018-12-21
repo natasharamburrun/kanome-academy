@@ -34,29 +34,34 @@ class DashboardComponent extends React.Component {
   }
 
   handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value.toLowerCase() });
+    this.setState({
+      [name]: value.toLowerCase()
+    });
   };
 
   handleViewChange = ({ target: { name, value } }) => {
     console.log(value);
-    this.setState({ view: value });
+    this.setState({
+      view: value
+    });
   };
 
   renderCardView() {
     return this.filterDashboard().map(dashboard => (
       <div key={dashboard.id}>
         <div className="card column">
-          <div className="taskName">{dashboard.name}</div>
+          <div className="taskName"> {dashboard.name} </div>{" "}
           <div className="dueDate">
-            <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
-          </div>
+            <Moment format="YYYY/MM/DD"> {dashboard.due} </Moment>{" "}
+          </div>{" "}
           <div className="dueComplete">
-            {dashboard.dueComplete ? "Completed" : "In Progress"}
-          </div>
+            {" "}
+            {dashboard.dueComplete ? "Completed" : "In Progress"}{" "}
+          </div>{" "}
           <div className="members">
-            <MembersComponent cardId={dashboard.id} />
-          </div>
-        </div>
+            <MembersComponent cardId={dashboard.id} />{" "}
+          </div>{" "}
+        </div>{" "}
       </div>
     ));
   }
@@ -68,32 +73,34 @@ class DashboardComponent extends React.Component {
           <table className="table is-bordered">
             <thead>
               <tr>
-                <th>Task Name</th>
-                <th>Due Date</th>
-                <th>Completed</th>
-                <th>Assigned Name</th>
-              </tr>
-            </thead>
+                <th> Task Name </th> <th> Due Date </th> <th> Completed </th>{" "}
+                <th> Assigned Name </th>{" "}
+              </tr>{" "}
+            </thead>{" "}
             <tbody>
+              {" "}
               {this.filterDashboard().map(dashboard => (
                 <tr key={dashboard.id}>
-                  <td>{dashboard.name}</td>
+                  <td> {dashboard.name} </td>{" "}
                   <td>
                     <div className="dueDate">
-                      <Moment format="YYYY/MM/DD">{dashboard.due}</Moment>
-                    </div>
-                  </td>
-                  <td>{dashboard.dueComplete ? "Completed" : "In Progress"}</td>
+                      <Moment format="YYYY/MM/DD"> {dashboard.due} </Moment>{" "}
+                    </div>{" "}
+                  </td>{" "}
+                  <td>
+                    {" "}
+                    {dashboard.dueComplete ? "Completed" : "In Progress"}{" "}
+                  </td>{" "}
                   <td>
                     <div className="members">
-                      <MembersComponent cardId={dashboard.id} />
-                    </div>
-                  </td>
+                      <MembersComponent cardId={dashboard.id} />{" "}
+                    </div>{" "}
+                  </td>{" "}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              ))}{" "}
+            </tbody>{" "}
+          </table>{" "}
+        </div>{" "}
       </div>
     );
   }
@@ -101,12 +108,12 @@ class DashboardComponent extends React.Component {
   render() {
     console.log(this.state);
     return (
-      <main className="container">
+      <main>
         <div className="columns">
           <div className="title column">
-            <h1 className="title">Kano Academy Dashboard</h1>
-          </div>
-        </div>
+            <h1> Kano Academy Dashboard </h1>{" "}
+          </div>{" "}
+        </div>{" "}
         <div className="header">
           <form className="searchbar">
             <div className="field">
@@ -117,24 +124,25 @@ class DashboardComponent extends React.Component {
                   type="text"
                   placeholder="Search by Task Name"
                   onChange={this.handleChange}
-                />
-              </div>
-            </div>
-          </form>
+                />{" "}
+              </div>{" "}
+            </div>{" "}
+          </form>{" "}
           <div className="dropdown">
             <div className="dropdown-trigger">
               <select onChange={this.handleViewChange}>
-                <option value="card">Card View</option>
-                <option value="table">Table View</option>
-              </select>
-            </div>
-          </div>
-        </div>
+                <option value="card"> Card View </option>{" "}
+                <option value="table"> Table View </option>{" "}
+              </select>{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
         <div className="columns data is-multiline is-centered">
+          {" "}
           {this.state.view === "card"
             ? this.renderCardView()
-            : this.renderTableView()}
-        </div>
+            : this.renderTableView()}{" "}
+        </div>{" "}
       </main>
     );
   }

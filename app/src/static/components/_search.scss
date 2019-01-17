@@ -1,12 +1,64 @@
+.header {
+  display: flex;
+  justify-content: center;
+  margin: 65px 0;
+
+}
+
+form.searchbar {
+  display: inline-block;
+}
+
+input.input {
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
+}
+
+input::placeholder {
+  font-size: $font-small;
+}
+
+
 .searchbar {
-  min-width: 500px;
+  width: 240px;
   display: inline-flex;
   text-align: left;
-  padding-bottom: 20px;
   align-content: center;
-  font-size: 15px;
 }
 
 .dropdown {
-  float: right;
+  margin-left: 10px;
+}
+
+select {
+  height: 44px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-white;
+  background: $color-orange-dark;
+  transition: background-color .3s;
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: none;
+
+  font-size: $font-X-small;
+  outline: none;
+  cursor: pointer;
+}
+
+select:hover {
+  background-color: $color-orange;
+}
+
+option {
+  color: $color-grey-dark-2;
+  background: #Fff;
+  border: 1px #DADADA solid;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
